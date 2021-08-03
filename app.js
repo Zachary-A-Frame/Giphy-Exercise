@@ -11,8 +11,11 @@ console.log("Let's get this party started!");
 async function getGif(searchParam) {
     const response = await axios.get(`http://api.giphy.com/v1/gifs/search?q=${searchParam}&api_key=MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym`)
 
-    const url = response.data.data[0].images.original.url
-    console.log(url)
+
+    let resultsLength = response.data.data.length
+    let randomIndex = Math.floor(Math.random() * resultsLength + 1)
+
+    let url = response.data.data[randomIndex].images.original.url
 
     $("#gifs-go-here").append(`<img src=${url}>`)
 }
